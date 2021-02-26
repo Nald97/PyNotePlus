@@ -11,4 +11,10 @@ def myClick():
 myButton = Button(root,text = "Click me!",command = myClick, fg = "blue", bg = "#00000")
 myButton.pack()
 
+myButton = Button(root,text = "Click me!",command = myClick, fg = "blue", bg = "#00000")
+myButton.pack()
+
+myButton = Button(root,text = "Click me!",command = myClick, fg = "blue", bg = "#00000")
+myButton.pack()
+
 root.mainloop()
