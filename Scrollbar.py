@@ -1,10 +1,7 @@
 import tkinter as tk
 
 
-class AutoHideScrollBar:
-
-    def __init__(self, p_text_area):
-        tk.Scrollbar(p_text_area)
+class AutoHideScrollBar(tk.Scrollbar):
 
     def set(self, low, high):
 
@@ -21,7 +18,6 @@ class AutoHideScrollBar:
                this widget")
 
     def place(self, **kw):
-
 
         raise (tk.TclError, "place cannot be used  with \
                this widget")
