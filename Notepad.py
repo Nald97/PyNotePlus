@@ -7,7 +7,7 @@ class Notepad:
     root = tk.Tk()
 
     # Default values for width and height
-    width = 1000
+    width = 1024
     height = 768
 
     text_area = tk.Text(root)
@@ -53,8 +53,8 @@ class Notepad:
         self.file_menu.add_command(label="Open file", command=self.open_file)
         self.file_menu.add_command(label="Save file", command=self.save_file)
         self.file_menu.add_separator()
-
         self.file_menu.add_command(label="Exit", command=self.quit_application)
+
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
 
         self.edit_menu.add_command(label="Cut", command=self.cut)
@@ -80,8 +80,9 @@ class Notepad:
         if self.file == "":
             self.file = None
         else:
-            self.root.title(os.path.basename(self.file) + " - Notepad")
+            self.root.title(os.path.basename(self.file) + " PyNote+")
             self.text_area.delete(1.0, tk.END)
+            # ADD CHOICE TO SAVE EXISTING NOTE BEFORE OPENING NEW FILE
 
             file = open(self.file, "r")
 
@@ -90,14 +91,15 @@ class Notepad:
             file.close()
 
     def new_file(self):
-        self.root.title("Untitled - Notepad")
+        self.root.title("Untitled Note | PyNote+")
         self.file = None
+        # ADD CHOICE TO SAVE EXISTING NOTE BEFORE OPENING NEW FILE
         self.text_area.delete(1.0, tk.END)
 
     def save_file(self):
 
         if self.file is None:
-            self.file = tk.filedialog.asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt",
+            self.file = tk.filedialog.asksaveasfilename(initialfile='Untitled Note.txt', defaultextension=".txt",
                                                         filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt"),
                                                                    ("Word Document", "*.docx")])
 
@@ -107,7 +109,7 @@ class Notepad:
                 file = open(self.file, "w")
                 file.write(self.text_area.get(1.0, tk.END))
                 file.close()
-                self.root.title(os.path.basename(self.file) + " - Notepad")
+                self.root.title(os.path.basename(self.file) + "| PyNote+")
         else:
             file = open(self.file, "w")
             file.write(self.text_area.get(1.0, tk.END))
