@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LearnTkinter.iml" filepath="$PROJECT_DIR$/.idea/LearnTkinter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PyNotePlus.iml" filepath="$PROJECT_DIR$/.idea/PyNotePlus.iml" />
     </modules>
   </component>
 </project>
