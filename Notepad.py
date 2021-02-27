@@ -129,4 +129,3 @@ class Notepad:
 
     def quit_application(self):
         self.root.destroy()
-
