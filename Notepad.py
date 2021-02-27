@@ -7,7 +7,7 @@ class Notepad:
     root = tk.Tk()
 
     # Default values for width and height
-    width = 1024
+    width = 1000
     height = 768
 
     text_area = tk.Text(root)
