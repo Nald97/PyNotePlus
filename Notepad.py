@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.filedialog
+import tkinter.messagebox
 import os
 
 
@@ -70,6 +71,12 @@ class Notepad:
         self.scroll_bar.config(command=self.text_area.yview)
         self.text_area.config(yscrollcommand=self.scroll_bar.set)
 
+    # ADD CHOICE TO SAVE EXISTING NOTE BEFORE OPENING NEW FILE
+    def save_checker(self):
+        result = tkinter.messagebox.askquestion("Warning!", "Do you want to save this file before opening new file?")
+        if result == 'yes':
+            self.save_file()
+
 
 
     def open_file(self):
@@ -93,8 +100,14 @@ class Notepad:
     def new_file(self):
         self.root.title("Untitled Note | PyNote+")
         self.file = None
-        # ADD CHOICE TO SAVE EXISTING NOTE BEFORE OPENING NEW FILE
+        current_text = self.text_area.get(1.0, tk.END)
+        if len(current_text) == 1:
+            pass
+        else:
+            self.save_checker()
         self.text_area.delete(1.0, tk.END)
+
+
 
     def save_file(self):
 
@@ -128,4 +141,14 @@ class Notepad:
         self.root.mainloop()
 
     def quit_application(self):
-        self.root.destroy()
+        confirm_exit = tkinter.messagebox.askquestion("Warning!", "Do you want to close the application? ")
+        if confirm_exit == 'yes':
+            current_text = self.text_area.get(1.0, tk.END)
+            if len(current_text) == 1:
+                pass
+            else:
+                result = tkinter.messagebox.askquestion("Warning!", "Do you want to save this file? ")
+                if result == "yes":
+                    self.save_file()
+            self.root.destroy()
+
