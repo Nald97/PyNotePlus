@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.filedialog
 import tkinter.messagebox
+from AutoHideScrollBar import AutoHideScrollbar
 import os
 
 
@@ -13,14 +14,14 @@ class Notepad:
 
     text_area = tk.Text(root)
     menu_bar = tk.Menu(root)
-
+    canvas = None
     # Disable tearoff for menus
     file_menu = tk.Menu(menu_bar, tearoff=0)
     edit_menu = tk.Menu(menu_bar, tearoff=0)
     page_layout_menu = tk.Menu(menu_bar, tearoff=0)
     options_menu = tk.Menu(menu_bar, tearoff=0)
 
-    scroll_bar = tk.Scrollbar(text_area)
+    scroll_bar = AutoHideScrollbar(root)
     file = None
 
     def __init__(self, **kwargs):
@@ -67,17 +68,14 @@ class Notepad:
         self.menu_bar.add_cascade(label="Options", menu=self.options_menu)
         self.root.config(menu=self.menu_bar)
 
-        self.scroll_bar.pack(side=tk.RIGHT, fill=tk.Y)
-        self.scroll_bar.config(command=self.text_area.yview)
+        self.scroll_bar.grid(row=0, column=1, sticky=tk.N + tk.S)
         self.text_area.config(yscrollcommand=self.scroll_bar.set)
+        self.scroll_bar.config(command=self.text_area.yview)
 
-    # ADD CHOICE TO SAVE EXISTING NOTE BEFORE OPENING NEW FILE
     def save_checker(self):
         result = tkinter.messagebox.askquestion("Warning!", "Do you want to save this file before opening new file?")
         if result == 'yes':
             self.save_file()
-
-
 
     def open_file(self):
 
@@ -106,8 +104,6 @@ class Notepad:
         else:
             self.save_checker()
         self.text_area.delete(1.0, tk.END)
-
-
 
     def save_file(self):
 
@@ -151,4 +147,3 @@ class Notepad:
                 if result == "yes":
                     self.save_file()
             self.root.destroy()
-
